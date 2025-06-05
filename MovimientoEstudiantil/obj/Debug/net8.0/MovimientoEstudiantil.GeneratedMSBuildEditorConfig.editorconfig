@@ -1,0 +1,87 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MovimientoEstudiantil
+build_property.RootNamespace = MovimientoEstudiantil
+build_property.ProjectDir = C:\Users\Wilson.M\OneDrive\Escritorio\Proyecto_Ingenieria\MovimientoEstudiantil-master\MovimientoEstudiantil\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Wilson.M\OneDrive\Escritorio\Proyecto_Ingenieria\MovimientoEstudiantil-master\MovimientoEstudiantil
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Auth/AuthLoginView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXV0aFxBdXRoTG9naW5WaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Estudiante/CreateEstudianteView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxDcmVhdGVFc3R1ZGlhbnRlVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Estudiante/IndexEstudianteView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0dWRpYW50ZVxJbmRleEVzdHVkaWFudGVWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Grafico/IndexGraficoView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR3JhZmljb1xJbmRleEdyYWZpY29WaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Home/IndexHomeView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleEhvbWVWaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Usuario/CreateUsuarioView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xDcmVhdGVVc3VhcmlvVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Usuario/HistorialRegistroUsuarioView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xIaXN0b3JpYWxSZWdpc3Ryb1VzdWFyaW9WaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Usuario/IndexUsuarioView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmRleFVzdWFyaW9WaWV3LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Usuario/InicioUsuarioView.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXN1YXJpb1xJbmljaW9Vc3VhcmlvVmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Wilson.M/OneDrive/Escritorio/Proyecto_Ingenieria/MovimientoEstudiantil-master/MovimientoEstudiantil/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-ejtknmjyvr

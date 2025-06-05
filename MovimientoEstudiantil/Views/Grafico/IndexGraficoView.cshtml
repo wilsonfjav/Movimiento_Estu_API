@@ -1,0 +1,476 @@
+﻿@model MovimientoEstudiantil.DTO.FiltroGraficoDTO
+
+@{
+    ViewData["Title"] = "Visualización";
+}
+
+<!-- ============================
+     VISTA: Módulo de Visualización MV
+============================= -->
+<!-- 1) Carga de estilos de Bootstrap y CSS propios -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/grafico.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+
+<main class="container mt-5">
+    <!-- Título principal -->
+    <h1 class="titulo text-center mb-4">📊 Módulo de Visualización MV</h1>
+
+    <!-- ============================
+         SECCIÓN DE FILTROS
+    ============================ -->
+    <section class="highlight-container p-3 rounded-4 bg-light">
+        <h3 class="subtitulo">Filtros</h3>
+        <p>Selecciona los filtros para personalizar tu gráfico.</p>
+
+        <!-- Instrucciones generales -->
+        <div class="alert alert-info py-2">
+            - Pulsa “➕ Agregar Filtro” para cada filtro estándar (Años, Carrera o Lugares).<br />
+            - El selector de “Tipo de gráfico” es independiente: elige la forma de visualización<br />
+            y se aplicará directamente al gráfico cuando pulses “Crear Gráfico”.<br />
+            - “Limpiar filtros” borra solo los filtros estándar (badges); el tipo de gráfico permanece.<br />
+        </div>
+
+        <!-- --------------------------
+             BLOQUE: Botones principales
+             ➕ Agregar Filtro
+             🔄 Limpiar filtros
+             Dropdown Tipo de gráfico
+        -------------------------- -->
+        <div class="row mb-3 align-items-center">
+            <!-- Botones ➕ Agregar y 🔄 Limpiar -->
+            <div class="col-auto">
+                <button type="button"
+                        class="btn btn-outline-secondary me-2"
+                        id="btnAgregarFiltro">
+                    ➕ Agregar Filtro
+                </button>
+                <button type="button"
+                        class="btn btn-outline-dark"
+                        id="btnLimpiarFiltros">
+                    🧹 Limpiar filtros
+                </button>
+            </div>
+
+            <!-- Selector Tipo de gráfico (independiente) -->
+            <div class="col-auto">
+                <div class="input-group">
+                    <label class="input-group-text mb-0" for="tipoGraficoSelect">Tipo de gráfico</label>
+                    <select class="form-select"
+                            id="tipoGraficoSelect"
+                            name="tipoGraficoSelect">
+                        <option value="bar">Barra</option>
+                        <option value="pie">Pastel</option>
+                        <option value="line">Línea</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pestañas: Años / Carrera / Lugares -->
+        <ul class="nav nav-tabs mb-3" id="filtroTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active"
+                        id="anios-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#anios"
+                        type="button"
+                        role="tab">
+                    Años
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link"
+                        id="carrera-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#carrera"
+                        type="button"
+                        role="tab">
+                    Carrera
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link"
+                        id="lugares-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#lugares"
+                        type="button"
+                        role="tab">
+                    Lugares
+                </button>
+            </li>
+        </ul>
+
+        <!-- ============================
+             FORMULARIO: inputs de cada pestaña
+        ============================ -->
+        <form id="formFiltros">
+            <div class="tab-content">
+                <!-- ===== PESTAÑA AÑOS ===== -->
+                <div class="tab-pane fade show active" id="anios" role="tabpanel">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label" for="anioInicio">Año de inicio</label>
+                            <select class="form-select" id="anioInicio" name="anioInicio">
+                                <option value="">Seleccionar</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="anioFin">Año final</label>
+                            <select class="form-select" id="anioFin" name="anioFin">
+                                <option value="">Seleccionar</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== PESTAÑA CARRERA ===== -->
+                <div class="tab-pane fade" id="carrera" role="tabpanel">
+                    <div class="mb-3">
+                        <label class="form-label" for="IngresoCarreraDeseada">Ingreso a Carrera Deseada</label>
+                        <select class="form-select"
+                                asp-for="IngresoCarreraDeseada"
+                                id="IngresoCarreraDeseada"
+                                name="IngresoCarreraDeseada">
+                            <option value="">Todos</option>
+                            <option value="Sí">Sí</option>
+                            <option value="No">No</option>
+                        </select>
+                        <span asp-validation-for="IngresoCarreraDeseada" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Sede" class="form-label">Sede</label>
+                        <select asp-for="Sede" class="form-select" id="Sede" name="Sede">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">Sede Central</option>
+                            <option value="2">Sede de Occidente - San Ramón</option>
+                            <option value="3">Recinto de Grecia</option>
+                            <option value="4">Sede Interuniversitaria de Alajuela</option>
+                            <option value="5">Sede del Atlántico - Turrialba</option>
+                            <option value="6">Recinto de Paraíso</option>
+                            <option value="7">Sede de Guanacaste - Liberia</option>
+                            <option value="8">Recinto de Santa Cruz</option>
+                            <option value="9">Sede del Pacífico - Puntarenas</option>
+                            <option value="10">Sede del Sur - Golfito</option>
+                            <option value="11">Recinto de Esparza</option>
+                            <option value="12">Sede del Caribe - Limón</option>
+                            <option value="13">Recinto de Guápiles</option>
+                            <option value="14">Recinto de Siquirres</option>
+                        </select>
+                        <span asp-validation-for="Sede" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <!-- ===== PESTAÑA LUGARES ===== -->
+                <div class="tab-pane fade" id="lugares" role="tabpanel">
+                    <div class="mb-3">
+                        <label asp-for="Provincia" class="form-label">Provincia</label>
+                        <select asp-for="Provincia" class="form-select" id="Provincia" name="Provincia">
+                            <option value="">Seleccione una opción</option>
+                            <option value="1">San José</option>
+                            <option value="2">Alajuela</option>
+                            <option value="3">Cartago</option>
+                            <option value="4">Heredia</option>
+                            <option value="5">Guanacaste</option>
+                            <option value="6">Puntarenas</option>
+                            <option value="7">Limón</option>
+                        </select>
+                        <span asp-validation-for="Provincia" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Traslado de Residencia</label>
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   asp-for="TrasladoResidencia"
+                                   id="trasladoTodos"
+                                   name="TrasladoResidencia"
+                                   value=""
+                                   checked />
+                            <label class="form-check-label" for="trasladoTodos">Todos</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   asp-for="TrasladoResidencia"
+                                   id="trasladoSi"
+                                   name="TrasladoResidencia"
+                                   value="Sí" />
+                            <label class="form-check-label" for="trasladoSi">Sí</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   asp-for="TrasladoResidencia"
+                                   id="trasladoNo"
+                                   name="TrasladoResidencia"
+                                   value="No" />
+                            <label class="form-check-label" for="trasladoNo">No</label>
+                        </div>
+                        <span asp-validation-for="TrasladoResidencia" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- ============================
+             BADGES: Filtros estándar que se han agregado
+        ============================ -->
+        <div class="mt-3">
+            <h5 class="subtitulo">Filtros seleccionados</h5>
+            <div id="filtrosSeleccionados" class="d-flex flex-wrap gap-2"></div>
+        </div>
+
+        <!-- ============================
+             BOTÓN “Crear Gráfico”
+        ============================ -->
+        <div class="mt-4">
+            <button type="button" class="btn btn-success" id="btnGenerar">
+                🎨 Crear Gráfico
+            </button>
+        </div>
+    </section>
+
+    <!-- ============================
+         SECCIÓN RESULTADO: Canvas para Chart.js
+    ============================ -->
+    <section class="my-5">
+        <h5 class="subtitulo">Resultado</h5>
+        <canvas id="canvasGrafico" height="100"></canvas>
+    </section>
+
+    <!-- ============================
+         BOTONES PARA EXPORTAR GRÁFICO
+    ============================ -->
+    <div class="mt-3 d-flex gap-3">
+        <button class="btn btn-outline-success" id="btnDescargarPNG">
+            📥 Descargar como PNG
+        </button>
+        <button class="btn btn-outline-danger" id="btnDescargarPDF">
+            🧾 Exportar como PDF
+        </button>
+    </div>
+</main>
+
+@section Scripts {
+    <!-- Asegúrate de cargar Bootstrap Bundle (con Popper) ANTES de tu JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        let chart;
+        // Este array guardará *solo* los filtros estándar: { clave, valor }
+        const filtrosAgregados = [];
+
+        /**
+         * Muestra un badge (pill) en pantalla con el texto "clave: valor".
+         */
+        function mostrarFiltroEnPantalla(clave, valor) {
+            const contenedor = document.getElementById('filtrosSeleccionados');
+            const tag = document.createElement('span');
+            tag.className = "badge bg-primary px-3 py-2";
+            tag.textContent = `${clave}: ${valor}`;
+            contenedor.appendChild(tag);
+        }
+
+        /**
+         * "Agregar Filtro":
+         * - Solo añade Años / Carrera / Lugares
+         * - No toca el dropdown de Tipo de gráfico (está separado).
+         */
+        document.getElementById('btnAgregarFiltro').addEventListener('click', () => {
+            // Detecta pestaña activa
+            const pestañaActiva = document.querySelector('#filtroTabs .nav-link.active')
+                                         .getAttribute('data-bs-target')
+                                         .substring(1);
+            let clave = "";
+            let valor = "";
+
+            if (pestañaActiva === 'anios') {
+                const inicio = document.getElementById('anioInicio').value;
+                const fin    = document.getElementById('anioFin').value;
+                if (!inicio || !fin) {
+                    alert('Debes escoger ambos años (inicio y fin) para agregar este filtro.');
+                    return;
+                }
+                clave = "Años";
+                valor = `${inicio} - ${fin}`;
+            }
+            else if (pestañaActiva === 'carrera') {
+                const ingreso = document.getElementById('IngresoCarreraDeseada').value;
+                const sede    = document.getElementById('Sede').value;
+                if (!ingreso && !sede) {
+                    alert('Debes escoger al menos "Ingreso a Carrera" o "Sede" para agregar este filtro.');
+                    return;
+                }
+                if (ingreso) {
+                    clave = "Ingreso Carrera";
+                    valor = ingreso;
+                } else {
+                    clave = "Sede";
+                    valor = sede;
+                }
+            }
+            else if (pestañaActiva === 'lugares') {
+                const provincia = document.getElementById('Provincia').value;
+                const traslado  = document.querySelector('input[name="TrasladoResidencia"]:checked').value;
+                if (!provincia && traslado === "") {
+                    alert('Debes escoger al menos "Provincia" o "Traslado de Residencia" para agregar este filtro.');
+                    return;
+                }
+                if (provincia) {
+                    clave = "Provincia";
+                    valor = provincia;
+                } else {
+                    clave = "Traslado";
+                    valor = traslado;
+                }
+            } else {
+                // Si está en otra pestaña (no debería), salimos
+                return;
+            }
+
+            // Evita duplicados exactos
+            const existe = filtrosAgregados.some(f => f.clave === clave && f.valor === valor);
+            if (existe) {
+                alert('Ese filtro ya fue agregado.');
+                return;
+            }
+
+            // Añadimos al array y pintamos badge
+            filtrosAgregados.push({ clave: clave, valor: valor });
+            mostrarFiltroEnPantalla(clave, valor);
+
+            // Limpiar inputs de la pestaña activa
+            if (pestañaActiva === 'anios') {
+                document.getElementById('anioInicio').selectedIndex = 0;
+                document.getElementById('anioFin').selectedIndex    = 0;
+            }
+            else if (pestañaActiva === 'carrera') {
+                document.getElementById('IngresoCarreraDeseada').selectedIndex = 0;
+                document.getElementById('Sede').selectedIndex                 = 0;
+            }
+            else if (pestañaActiva === 'lugares') {
+                document.getElementById('Provincia').selectedIndex = 0;
+                document.querySelector('input[name="TrasladoResidencia"][value=""]').checked = true;
+            }
+        });
+
+        /**
+         * "Limpiar filtros":
+         * - Borra todos los badges de filtros estándar
+         * - Vacía el array filtrosAgregados
+         * - Destruye el chart si existe
+         */
+        document.getElementById('btnLimpiarFiltros').addEventListener('click', () => {
+            filtrosAgregados.length = 0;
+            document.getElementById('filtrosSeleccionados').innerHTML = '';
+            if (chart) {
+                chart.destroy();
+                chart = null;
+            }
+        });
+
+        /**
+         * "Crear Gráfico":
+         * - Toma todos los filtros estándar de filtrosAgregados
+         * - Lee el valor actual de "Tipo de gráfico" desde el dropdown (bar/pie/line)
+         * - Arma el DTO (FiltroGraficoDTO) y lo envía al servidor
+         * - Si regresa datos, construye el Chart.js con el tipo elegido
+         */
+        document.getElementById('btnGenerar').addEventListener('click', () => {
+            // Construir objeto DTO para enviar
+            const payload = {
+                AnioInicio: 0,
+                AnioFin: 0,
+                Provincia: '',
+                Sede: '',
+                TrasladoResidencia: '',
+                IngresoCarreraDeseada: '',
+                TipoGrafico: document.getElementById('tipoGraficoSelect').value
+            };
+
+            filtrosAgregados.forEach(f => {
+                switch (f.clave) {
+                    case 'Años':
+                        const partes = f.valor.split(' - ');
+                        payload.AnioInicio = parseInt(partes[0]);
+                        payload.AnioFin   = parseInt(partes[1]);
+                        break;
+                    case 'Provincia':
+                        payload.Provincia = f.valor;             // ID provincia
+                        break;
+                    case 'Sede':
+                        payload.Sede = f.valor;                  // ID sede
+                        break;
+                    case 'Traslado':
+                        payload.TrasladoResidencia = f.valor;    // "Sí" o "No"
+                        break;
+                    case 'Ingreso Carrera':
+                        payload.IngresoCarreraDeseada = f.valor; // "Sí" o "No"
+                        break;
+                }
+            });
+
+            fetch('/Grafico/ObtenerDatos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP status " + res.status);
+                return res.json();
+            })
+            .then(datos => {
+                if (!Array.isArray(datos) || datos.length === 0) {
+                    alert("❌ No hay datos para los filtros seleccionados.");
+                    return;
+                }
+
+                // Extraer etiquetas y valores
+                const labels  = datos.map(d => d.categoria);
+                const valores = datos.map(d => d.cantidad);
+
+                // Si ya existía un chart, lo destruimos
+                if (chart) {
+                    chart.destroy();
+                    chart = null;
+                }
+
+                // Crear el gráfico con el tipo especificado
+                const ctx = document.getElementById('canvasGrafico').getContext('2d');
+                chart = new Chart(ctx, {
+                    type: payload.TipoGrafico, // “bar”, “pie” o “line”
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Estudiantes',
+                            data: valores,
+                            backgroundColor: [
+                                '#FF6384', '#36A2EB', '#FFCE56',
+                                '#4BC0C0', '#9966FF', '#FF9F40'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { display: true }
+                        }
+                    }
+                });
+            })
+            .catch(err => {
+                console.error("Error al generar gráfico:", err);
+                alert("❌ Ocurrió un error al procesar el gráfico.");
+            });
+        });
+    </script>
+}

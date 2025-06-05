@@ -1,0 +1,101 @@
+﻿@model IEnumerable<MovimientoEstudiantil.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Diccionario local de ID -> Nombre de Sede
+    var sedes = new Dictionary<int, string>
+    {
+        { 1, "Sede Central" },
+        { 2, "Sede de Occidente - San Ramón" },
+        { 3, "Recinto de Grecia" },
+        { 4, "Sede Interuniversitaria de Alajuela" },
+        { 5, "Sede del Atlántico - Turrialba" },
+        { 6, "Recinto de Paraíso" },
+        { 7, "Sede de Guanacaste - Liberia" },
+        { 8, "Recinto de Santa Cruz" },
+        { 9, "Sede del Pacífico - Puntarenas" },
+        { 10, "Sede del Sur - Golfito" },
+        { 11, "Recinto de Esparza" },
+        { 12, "Sede del Caribe - Limón" },
+        { 13, "Recinto de Guápiles" },
+        { 14, "Recinto de Siquirres" }
+    };
+}
+
+<div class="container mt-4 mb-5">
+    <a asp-controller="Usuario" asp-action="Panel" class="btn btn-outline-secondary mt-4 ms-4">
+        <i class="bi bi-arrow-left"></i> Volver
+    </a>
+
+    <h1 class="text-center mt-3 mb-3" style="font-family: 'Playfair Display', serif;">
+        Gestión de Usuarios
+    </h1>
+
+    @if (TempData["MensajeExito"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            @TempData["MensajeExito"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="fila-control mt-3 mb-3">
+        <input type="text" id="busquedaCorreo" class="input-busqueda" placeholder="🔍 Buscar Usuarios por correo electrónico..." />
+        <a asp-action="Create" class="btn-nuevo">+ Nuevo Usuario</a>
+    </div>
+
+    <div class="contenedor-azul">
+        <div class="table-responsive">
+            <table id="tablaUsuarios" class="tabla-estudiantes">
+                <thead>
+                    <tr>
+                        <th>ID Usuario</th>
+                        <th>Correo</th>
+                        <th>Rol</th>
+                        <th>Fecha Registro</th>
+                        <th>Sede</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.idUsuario</td>
+                            <td>@item.correo</td>
+                            <td>@item.rol</td>
+                            <td>@item.fechaRegistro.ToShortDateString()</td>
+                            <td>
+                                @(
+                                                            sedes.ContainsKey(item.sede)
+                                                            ? sedes[item.sede]
+                                                            : "N/A"
+                                                            )
+                        </td>
+
+                        </tr>
+                                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/js/modalBuscarUsuario.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const mensaje = document.querySelector(".alert-success");
+            if (mensaje) {
+                setTimeout(() => {
+                    mensaje.classList.remove("show");
+                    mensaje.classList.add("fade");
+                    setTimeout(() => mensaje.remove(), 500);
+                }, 5000); // ⏱ 5 segundos
+            }
+        });
+    </script>
+}

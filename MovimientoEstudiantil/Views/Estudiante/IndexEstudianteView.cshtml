@@ -1,0 +1,122 @@
+﻿@model IEnumerable<MovimientoEstudiantil.Models.Estudiante>
+
+@{
+    ViewData["Title"] = "Estudiantes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    // Diccionario de provincias
+    var provincias = new Dictionary<int, string>
+    {
+        { 1, "San José" },
+        { 2, "Alajuela" },
+        { 3, "Cartago" },
+        { 4, "Heredia" },
+        { 5, "Guanacaste" },
+        { 6, "Puntarenas" },
+        { 7, "Limón" }
+    };
+
+    // Diccionario de sedes
+    var sedes = new Dictionary<int, string>
+    {
+        { 1, "Sede Central" },
+        { 2, "Sede de Occidente - San Ramón" },
+        { 3, "Recinto de Grecia" },
+        { 4, "Sede Interuniversitaria de Alajuela" },
+        { 5, "Sede del Atlántico - Turrialba" },
+        { 6, "Recinto de Paraíso" },
+        { 7, "Sede de Guanacaste - Liberia" },
+        { 8, "Recinto de Santa Cruz" },
+        { 9, "Sede del Pacífico - Puntarenas" },
+        { 10, "Sede del Sur - Golfito" },
+        { 11, "Recinto de Esparza" },
+        { 12, "Sede del Caribe - Limón" },
+        { 13, "Recinto de Guápiles" },
+        { 14, "Recinto de Siquirres" }
+    };
+}
+
+<div class="container mt-4 mb-5">
+
+    <!-- 🔔 Mensaje de éxito -->
+    @if (TempData["MensajeExito"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            @TempData["MensajeExito"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="fila-control mt-3 mb-3">
+        <input type="text" id="busquedaCorreo" class="input-busqueda" placeholder="🔍 Buscar Estudiantes por correo electronico..." />
+        <a asp-action="Create" class="btn-nuevo">+ Nuevo Estudiante</a>
+    </div>
+
+    <div class="contenedor-azul">
+        <div class="table-responsive">
+            <!-- ← esta clase hace la magia en pantallas pequeñas -->
+            <table id="tablaEstudiantes" class="tabla-estudiantes">
+                <thead>
+                    <tr>
+                        <th>ID Estudiante</th>
+                        <th>Correo</th>
+                        <th>Provincia</th>
+                        <th>Sede Universitaria</th>
+                        <th>Satisfacción Carrera</th>
+                        <th>Año Ingreso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.idEstudiante</td>
+                            <td>@item.correo</td>
+                            <td>@(provincias.ContainsKey(item.provincia) ? provincias[item.provincia] : "N/A")</td>
+                            <td>@(sedes.ContainsKey(item.sede) ? sedes[item.sede] : "N/A")</td>
+                            <td>@item.satisfaccionCarrera</td>
+                            <td>@item.anioIngreso</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script src="~/js/modalAgregarEstudiante.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const input = document.getElementById("busquedaCorreo");
+            const tabla = document.getElementById("tablaEstudiantes");
+
+            if (!input || !tabla) return;
+
+            const filas = tabla.querySelectorAll("tbody tr");
+
+            input.addEventListener("keyup", function () {
+                const filtro = input.value.toLowerCase();
+                filas.forEach(fila => {
+                    const correoTd = fila.querySelectorAll("td")[1]; // Segunda columna = correo
+                    const texto = correoTd?.textContent.toLowerCase() || "";
+                    fila.style.display = texto.includes(filtro) ? "" : "none";
+                });
+            });
+
+            // 💡 Script para ocultar el mensaje de éxito automáticamente
+            const mensaje = document.querySelector(".alert-success");
+            if (mensaje) {
+                setTimeout(() => {
+                    // Opción con efecto de desvanecimiento
+                    mensaje.classList.remove("show");
+                    mensaje.classList.add("fade");
+                    setTimeout(() => mensaje.remove(), 500); // Espera que termine el fade
+                }, 5000); // ⏱ 5 segundos
+            }
+        });
+    </script>
+}

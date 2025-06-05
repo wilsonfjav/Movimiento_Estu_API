@@ -1,0 +1,76 @@
+﻿.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    min-height: 80vh;
+}
+
+.btn-volver {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: transparent;
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    font-size: 14px;
+    color: #333;
+    text-decoration: none;
+}
+
+    .btn-volver:hover {
+        background-color: #f0f0f0;
+    }
+
+.login-content {
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+}
+
+.titulo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.descripcion {
+    margin-bottom: 24px;
+}
+
+.login-circle {
+    background-color: #e0f4fb;
+    border-radius: 50%;
+    padding: 40px 30px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.footer-label {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #555;
+}
+
+/* Responsivo */
+@media (max-width: 576px) {
+    .login-circle {
+        padding: 30px 20px;
+        border-radius: 30px;
+        aspect-ratio: unset;
+    }
+
+    .btn-volver {
+        top: 10px;
+        left: 10px;
+        font-size: 12px;
+        padding: 4px 10px;
+    }
+}

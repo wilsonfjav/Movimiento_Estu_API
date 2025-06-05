@@ -1,0 +1,334 @@
+﻿/* =======================
+   ESTRUCTURA GENERAL
+========================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0 !important;
+    background-color: white !important;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+    font-size: 1.5rem; /* tamaño grande */
+    line-height: 1.9;
+    padding: 0 !important;
+    background-color: white !important;
+}
+
+/* Contenedor destacado ocupa todo el ancho */
+.highlight-container {
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    width: 100vw;
+    padding: 40px;
+    background-color: white;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+    /* Filas del contenedor */
+    .highlight-container .row {
+        dalign-items: center !important;
+        justify-content: center;
+        margin-bottom: 4rem;
+    }
+
+    /* Titulares y párrafos */
+    .highlight-container h5 {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .highlight-container p {
+        font-size: 1.2rem;
+        text-align: center;
+    }
+
+    /* Subtítulos destacados */
+    .highlight-container .subtitulo {
+        font-size: 1.6rem;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    /* Imágenes fluidas */
+    .highlight-container img {
+        max-width: 100%;
+        height: 280px; /* altura fija para que no se vean desbalanceadas */
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+        
+    }
+
+/* =======================
+   Media Queries (celulares)
+========================== */
+@media (max-width: 576px) {
+    .highlight-container {
+        padding: 16px;
+    }
+
+        .highlight-container .row {
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .highlight-container .col-md-4,
+        .highlight-container .col-md-8 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .highlight-container img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-container h5 {
+            font-size: 1.15rem;
+        }
+
+        .highlight-container p,
+        .highlight-container .subtitulo {
+            font-size: 1rem;
+        }
+
+        /* Ajuste de espacio en filas */
+        .highlight-container .row {
+            margin-bottom: 1.25rem;
+        }
+}
+
+/* Estilo de los cuadros */
+.info-box {
+    min-height: 380px;
+    background-color: #f9f9f9;
+    border: 2px solid #005DA3 !important;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+    /* Títulos y texto con tamaños más grandes */
+    .info-box h4 {
+        font-size: 1.35rem; /* antes 1.2rem */
+        margin-bottom: 0.5rem;
+    }
+
+    .info-box h6 {
+        font-size: 1.15rem; /* antes 1rem */
+        margin-bottom: 1rem;
+    }
+
+    .info-box p {
+        font-size: 1.05rem; /* antes 0.95rem */
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Botón uniforme */
+    .info-box .btn {
+        background-color: #005DA3;
+        border-color: #005DA3;
+        font-size: 1rem; /* un poco más grande también */
+    }
+
+/* Aumentar separación horizontal entre cuadros */
+@media (min-width: 768px) {
+    .info-row > .col-md-6:first-child {
+        padding-right: 1.5rem;
+    }
+
+    .info-row > .col-md-6:last-child {
+        padding-left: 1.5rem;
+    }
+}
+
+/* Responsive ajustes móviles */
+@media (max-width: 767.98px) {
+    .info-box {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .info-row > .col-md-6 {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+
+
+/* =======================
+   HEADER
+========================== */
+.header-container {
+    background-color: rgb(76, 198, 249);
+    padding: 15px 30px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+    .header-left img {
+        height: 60px;
+        width: auto;
+    }
+
+.header-title h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-title h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.header-nav-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.header-nav {
+    display: flex;
+    gap: 15px;
+}
+
+    .header-nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .header-nav a:hover {
+            text-decoration: underline;
+        }
+
+.login-btn {
+    background-color: white;
+    color: rgb(76, 198, 249);
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+
+    .login-btn:hover {
+        background-color: #f0f0f0;
+        text-decoration: underline;
+    }
+
+/* =======================
+   SUBHEADER
+========================== */
+.sub-header {
+    background-color: #00589D;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* =======================
+   FOOTER
+========================== */
+.footer-container {
+    background-color: #00589D;
+    color: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+}
+
+    .footer-section img {
+        height: 50px;
+        width: auto;
+    }
+
+    .footer-section.center {
+        text-align: center;
+    }
+
+    .footer-section.right {
+        text-align: right;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+/* =======================
+   RESPONSIVE
+========================== */
+@media (max-width: 768px) {
+    .highlight-container .row {
+        flex-wrap: wrap;
+        flex-direction: column;
+    }
+
+    .highlight-container .col-md-4,
+    .highlight-container .col-md-8 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .highlight-container img {
+        height: auto;
+        object-fit: contain;
+        margin-bottom: 1rem;
+    }
+
+    .highlight-container p {
+        font-size: 1.15rem;
+        text-align: center;
+    }
+
+    .highlight-container .subtitulo {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+}
+
+
+btn,
+.info-box .btn {
+    font-size: 1.20rem !important; /* Tamaño de letra más grande */
+    padding: 12px 28px !important; /* Más altura y ancho interno */
+    min-height: 50px; /* Altura mínima decente */
+    min-width: 180px; /* Ancho mínimo */
+    border-radius: 8px !important; /* Bordes más suaves */
+    font-weight: bold;
+    text-align: center;
+}
+

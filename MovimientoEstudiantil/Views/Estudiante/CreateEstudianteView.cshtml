@@ -1,0 +1,135 @@
+﻿@model MovimientoEstudiantil.DTO.EstudianteDTO
+
+@{
+    ViewData["Title"] = "Registrar Nuevo Estudiante";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewData["Mensaje"] != null)
+{
+    <div id="alertMensaje" class="alert alert-danger">
+        <strong>@ViewData["Mensaje"]</strong>
+    </div>
+}
+
+@if (ViewData["Detalle"] != null)
+{
+    <div id="alertDetalle" class="alert alert-warning">
+        @ViewData["Detalle"]
+    </div>
+}
+
+<div class="estudiante-create">
+    <a asp-action="Index" class="btn btn-outline-secondary mb-3 ms-3">
+        <i class="bi bi-arrow-left"></i> Volver
+    </a>
+
+    <h1 class="text-center mt-3 mb-3" style="font-family: 'Playfair Display', serif;">
+        Registrar Nuevo Estudiante
+    </h1>
+
+    <div class="form-box">
+        <form id="formEstudiante" method="post" asp-action="Create">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label asp-for="correo" class="form-label">Correo Institucional</label>
+                <input asp-for="correo" class="form-control" id="correo" />
+                <span asp-validation-for="correo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="provincia" class="form-label">Provincia</label>
+                <select asp-for="provincia" class="form-select" id="provincia">
+                    <option value="">Seleccione una opción</option>
+                    <option value="1">San José</option>
+                    <option value="2">Alajuela</option>
+                    <option value="3">Cartago</option>
+                    <option value="4">Heredia</option>
+                    <option value="5">Guanacaste</option>
+                    <option value="6">Puntarenas</option>
+                    <option value="7">Limón</option>
+                </select>
+                <span asp-validation-for="provincia" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="sede" class="form-label">Sede</label>
+                <select asp-for="sede" class="form-select" id="sede">
+                    <option value="">Seleccione una opción</option>
+                    <option value="1">Sede Central</option>
+                    <option value="2">Sede de Occidente - San Ramón</option>
+                    <option value="3">Recinto de Grecia</option>
+                    <option value="4">Sede Interuniversitaria de Alajuela</option>
+                    <option value="5">Sede del Atlántico - Turrialba</option>
+                    <option value="6">Recinto de Paraíso</option>
+                    <option value="7">Sede de Guanacaste - Liberia</option>
+                    <option value="8">Recinto de Santa Cruz</option>
+                    <option value="9">Sede del Pacífico - Puntarenas</option>
+                    <option value="10">Sede del Sur - Golfito</option>
+                    <option value="11">Recinto de Esparza</option>
+                    <option value="12">Sede del Caribe - Limón</option>
+                    <option value="13">Recinto de Guápiles</option>
+                    <option value="14">Recinto de Siquirres</option>
+                </select>
+                <span asp-validation-for="sede" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="satisfaccionCarrera" class="form-label">Satisfacción de Carrera</label>
+                <select asp-for="satisfaccionCarrera" class="form-select" id="satisfaccionCarrera">
+                    <option value="">Seleccione una opción</option>
+                    <option value="SI">Sí</option>
+                    <option value="NO">No</option>
+                </select>
+                <span asp-validation-for="satisfaccionCarrera" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="anioIngreso" class="form-label">Año de Ingreso</label>
+                <select asp-for="anioIngreso" class="form-select" id="anioIngreso">
+                    <option value="">Seleccione una opción</option>
+                    <option value="2022">2022</option>
+                    <option value="2023">2023</option>
+                    <option value="2024">2024</option>
+                </select>
+                <span asp-validation-for="anioIngreso" class="text-danger"></span>
+            </div>
+
+            <!-- Botón que abre el modal -->
+            <button type="submit" class="btn btn-primary" id="btnMostrarModal">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Modal de confirmación -->
+<div class="modal fade" id="modalConfirmacion" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Confirmación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p><strong>¿Está seguro de guardar este estudiante?</strong></p>
+                <table class="table table-bordered">
+                    <tr><th>Correo</th><td id="resumenCorreo"></td></tr>
+                    <tr><th>Provincia</th><td id="resumenProvincia"></td></tr>
+                    <tr><th>Sede</th><td id="resumenSede"></td></tr>
+                    <tr><th>Satisfacción Carrera</th><td id="resumenSatisfaccion"></td></tr>
+                    <tr><th>Año de Ingreso</th><td id="resumenAnio"></td></tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="btnConfirmarGuardar">Aceptar y Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
